@@ -1,0 +1,65 @@
+@font-face {
+    font-family: Alice in Wonderland;
+    src: url(AliceinWonderland.ttf);
+}
+
+html {
+    font-size: 2rem;
+}
+
+@font-face {
+    font-family: RingBearer;
+    src: url(RingBearer.ttf);
+}
+
+body {
+    font-family: RingBearer;
+    background-image: url('images/background.jpg');
+    display: flex;
+    justify-content: center;
+} 
+
+main {
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 50%;
+    aspect-ratio: 161803 / 100000;
+    border-radius: 1rem;
+    padding: 1rem;    
+}
+
+.title {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.images {
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    max-height: 10rem;
+    border: .05rem solid black;
+    border-radius: .5rem;
+    transition: all 1s ease;
+}
+img:hover {
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+}
+
+.howTo {
+    font-size: .5rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.scorediv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.results {
+    text-align: center;
+    margin: 1rem;
+}

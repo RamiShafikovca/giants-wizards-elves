@@ -1,3 +1,11 @@
+const resultdiv = document.querySelector('div.results');
+const playerScoreDiv = document.querySelector('div.playerScore');
+const computerScoreDiv = document.querySelector('div.computerScore');
+const howTo = document.querySelector('.howTo');
+const howToPopup = document.querySelector('.howToPopup');
+const images = document.querySelectorAll('img');
+let playerScore = 0, computerScore = 0;
+
 function getComputerChoice () {
     let choice = Math.floor(Math.random() * 3);
     switch (choice) {
@@ -18,8 +26,8 @@ function playRound (playerSelection, computerSelection) {
     if (playerSelection == computerSelection) return "It's a Tie";
     //Player's Giants lose to Wizards, but win against Elves
     else if (playerSelection == "giants") {
-        if (computerSelection == "wizards") return `You Lose! Wizards beat giants`;
-        else return `You Win! giants beats elves`;
+        if (computerSelection == "wizards") return `You Lose! Wizards beat Giants`;
+        else return `You Win! Giants beat Elves`;
     }
     //Player's Wizards lose to Elves, but win against Giants
     else if (playerSelection == "wizards") {
@@ -28,17 +36,33 @@ function playRound (playerSelection, computerSelection) {
     }
     //Player's Elves lose to Giants, but wing against Wizards
     else if (playerSelection == "elves") {
-        if (computerSelection == "giants") return `You Lose! Giants Beat Elves`;
-        else return `You Win! Elves Beat Wizards`;
+        if (computerSelection == "giants") return `You Lose! Giants beat Elves`;
+        else return `You Win! Elves beat Wizards`;
     }
 }
 
-function game () {
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Giants, Wizards, or Elves?").toLowerCase();
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+function game (playerSelection) {
+    const computerSelection = getComputerChoice();
+    resultdiv.innerHTML = `${playRound(playerSelection, computerSelection)}`;
+    //After getting the round's result, update page text to reflect score and game status
+     if (resultdiv.innerHTML.includes('Win')) playerScore++;
+     else if (resultdiv.innerHTML.includes('Lose')) computerScore++;
+     playerScoreDiv.innerHTML = `Player: ${playerScore}`;
+     computerScoreDiv.innerHTML = `Computer:${computerScore}`;
+
+     //If there is a winner, reset the game
+     if (playerScore == 5 || computerScore == 5) {
+        alert(`${playerScore > computerScore ? "Player" : "Computer"} wins!`);
+        resultdiv.innerHTML = `You ${playerScore > computerScore ? "won" : "lost"} with a score of ${playerScore} - ${computerScore}. Play again?`;
+        playerScore = 0;
+        computerScore = 0;
+        playerScoreDiv.innerHTML = `Player: ${playerScore}`;
+        computerScoreDiv.innerHTML = `Computer:${computerScore}`;
     }
 }
 
-game();
+images.forEach((image) =>{image.addEventListener('click', () => {game(image.className)});});
+
+howTo.addEventListener('click', () => alert(
+    "This game works like Rock-paper-scissors: Giants beat Elves,\nWizards beat Giants,\n And Elves beat Wizards.\n Can you beat the Computer in a best of 5?"
+));
