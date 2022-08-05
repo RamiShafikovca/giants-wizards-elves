@@ -6,6 +6,7 @@ const howToPopup = document.querySelector('.howToPopup');
 const images = document.querySelectorAll('img');
 let playerScore = 0, computerScore = 0;
 
+//Randomly generate the computer's choice of character
 function getComputerChoice () {
     let choice = Math.floor(Math.random() * 3);
     switch (choice) {
@@ -20,6 +21,7 @@ function getComputerChoice () {
             break;
     }
 }
+
 
 function playRound (playerSelection, computerSelection) {
     //If player and computer choose the same character, they tie
@@ -61,7 +63,9 @@ function game (playerSelection) {
     }
 }
 
-images.forEach((image) =>{image.addEventListener('click', () => {game(image.className)});});
+images.forEach((image) =>{image.addEventListener('click', () => {
+    game(image.className);
+});});
 
 howTo.addEventListener('click', () => alert(
     "This game works like Rock-paper-scissors: Giants beat Elves,\nWizards beat Giants,\n And Elves beat Wizards.\n Can you beat the Computer in a best of 5?"
